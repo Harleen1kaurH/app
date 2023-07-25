@@ -4,6 +4,11 @@ from chat.utils import update_room, is_user_allowed_in_room, raise_not_authorize
 
 
 @frappe.whitelist(allow_guest=True)
+
+# This function sends a message via socketio to a specific chat room. It checks if the user is allowed in the room, creates a new chat message document
+# with the provided content, sender's name, room name, and sender's email, and then inserts the message into the database. 
+# After that, it broadcasts the new message to all members of the chat room, updating the "typing" status and the latest chat updates.
+
 def send(content: str, user: str, room: str, email: str):
     """Send the message via socketio
 
@@ -25,9 +30,11 @@ def send(content: str, user: str, room: str, email: str):
             "sender_email": email,
         }
     ).insert(ignore_permissions=True)
-
+#This line calls the update_room() function with the room and content as arguments. 
+#The purpose of this function is to update the last_message attribute of the chat room with the most recent message
     update_room(room=room, last_message=content)
 
+    #Dictionary which stores information about its newly created message
     result = {
         "content": content,
         "user": user,
@@ -35,6 +42,7 @@ def send(content: str, user: str, room: str, email: str):
         "room": room,
         "sender_email": email,
     }
+    
     typing_data = {
         "room": room,
         "user": user,
@@ -43,6 +51,9 @@ def send(content: str, user: str, room: str, email: str):
     }
     typing_event = f"{room}:typing"
 
+    #broadcasting real-time events to users within a chat room using the Frappe framework's frappe.publish_realtime function.
+    #It loops through each member of the chat room (obtained from frappe.get_cached_doc("Chat Room", room).get_members()) and sends multiple real-time events to them.
+    
     for chat_user in frappe.get_cached_doc("Chat Room", room).get_members():
         frappe.publish_realtime(event=typing_event, user=chat_user, message=typing_data)
         frappe.publish_realtime(
