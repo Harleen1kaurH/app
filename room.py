@@ -83,10 +83,14 @@ Let's break down the code:
         ).run(as_dict=True)
         if direct_room_exists:
             frappe.throw(title="Error", msg=_("Direct Room already exists!"))
+#if type == "Direct": block checks if the room type is "Direct." If so, it attempts to find an existing chat room between the two users specified in the users list. 
+#If such a room already exists, it throws an error indicating that a direct room already exists.
 
     room_doc = get_private_room_doc(room_name, members, type).insert(ignore_permissions=True)
+#If the room doesn't already exist, it proceeds to create the chat room by calling the get_private_room_doc() function. 
+#The get_private_room_doc() function creates and returns a new chat room document object with the specified details.
 
-    profile = {
+        profile={
         "room_name": room_name,
         "last_date": room_doc.modified,
         "room": room_doc.name,
@@ -94,17 +98,20 @@ Let's break down the code:
         "room_type": type,
         "members": members,
     }
+#After creating the chat room, a profile dictionary is constructed with relevant room information, such as room_name, last_date, room, is_read, room_type, and members. 
 
     if type == "Direct":
         profile["member_names"] = [
             {"name": get_full_name(u), "email": u} for u in users
         ]
+    #If the room type is "Direct," it also adds member_names, which is a list of dictionaries containing the name and email of each user in the users list
 
     for user in users:
         frappe.publish_realtime(
             event="private_room_creation", message=profile, user=user, after_commit=True
         )
-
+#The code then iterates through the users list and publishes a real-time event ("private_room_creation") to each user, 
+# notifying them about the new chat room. The profile dictionary is sent as the message.
 
 def get_private_room_doc(room_name, members, type):
     return frappe.get_doc({
@@ -113,13 +120,18 @@ def get_private_room_doc(room_name, members, type):
         'members': members,
         'type': type,
     })
-
+# Function used for creating new private room if it does not already exist
 
 def comparator(key):
     return (
         key.is_read,
         reversor(key.modified)
     )
+    #The function returns a tuple of attributes that will be used for sorting. In this case, it returns (key.is_read, reversor(key.modified)).
+#This means it will first sort based on the is_read attribute (unread rooms will come first), and then it will sort based on the modified attribute in descending order
+#(newer rooms will come first).
+
+
 
 
 class reversor:
