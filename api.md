@@ -1,6 +1,6 @@
-### API FILES
+# API FILES
 
-### chat_add_room.js:
+## chat_add_room.js:
 <PRE>
 It imports create private room function from chat_utilis.
 It defined a class named "AddChatRoom".The constructor is the first
@@ -66,7 +66,7 @@ successful, it proceeds to set up a new ChatSpace instance to handle
 the chat space (room) for the user.
 The render() method renders the chat form on the $wrapper element
 (parent element) and attaches an event listener to the "Submit" button
-  </PRE>
+</PRE>
 
 ## Chat_list.js:
 <PRE>
