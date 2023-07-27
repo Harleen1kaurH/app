@@ -241,7 +241,8 @@ Finally, the function returns a tuple containing the room name and the guest's t
 </pre>
 #### def get_guest_room(*, email: str, full_name: str, message: str):
 This function gives guest room if it already exists , if not create guest room.
-
+<br><br>
+The order in which various processes are triggered are in api.md file
 
   
   
