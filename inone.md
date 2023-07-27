@@ -1,5 +1,6 @@
 # CHATTING APP
-## CREATE A NEW APP:<pre>
+## CREATE A NEW APP:
+<pre>
 $cd frappe-bench
 $bench new-app chat
 $bench --site chat.local install-app chatting
@@ -7,7 +8,7 @@ $bench use chat.local
 $bench start</pre>
 
 ## DOCTYPES:
-  <pre>
+<pre>
 It has 6 doctypes: 
 
 1. Chat Message:
@@ -48,7 +49,7 @@ User : Link to User doctype
 ▪︎ Enable Notification (Check)
 </pre>
 ## UTILIS FILE:
-  <pre>
+<pre>
 It contains various utility functions which help manage and control
 various aspects of the chat application, including user authorization,
 room details, chat settings, and more. They provide essential
@@ -69,6 +70,7 @@ It contains definition to following functions:
 11.is_user_allowed_in_room(room, email, user=None):
 12.NotAuthorizedError and raise_not_authorized_error():
 </pre>
+
 ## PUBLIC FILE
 
 ### 1.ChatBundle.css:
