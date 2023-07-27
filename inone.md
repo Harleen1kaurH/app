@@ -121,12 +121,14 @@ to split the string at each comma, creating a list of individual member names an
 
 It defined two functions: Settings and user_settings
 
-#### Settings(token):<pre>
+#### Settings(token):
+<pre>
 Code is configuring a dictionary called config, which will be used to set up the chat application's settings and behavior.
 It specifies the port number for the Socket.IO server, which enables real-time bidirectional communication between the client (usually a web browser) and the server, sets the value of the 'user_emai' key to current user email, gives guest title and then merge this dictionary with get_chat_settings dictionary.
 If the user is admin then additional settings (like admin name,user settings) related to the admin user are added to the config dictionary.
 If the user is not admin(is a guest user) then its token is verified.If verification=true then keys 'chat_room' and 'user_email' are assigned value associated with token.
 </pre>
+
 #### user_settings(Settings):
 It is responsible for managing and updating the chat settings for a specific user.It checks if chat settings already exists for current user.If the document does not exist for the current user, the code creates a new one using frappe.get_doc() method. It sets the user-specific settings, such as 'enable_notifications' and 'enable_message_tone', based on the provided settings dictionary.If the document already exists for the current user, the code fetches the existing document using frappe.get_doc(). It updates the enable_notifications and enable_message_tone fields with the values from the provided settings dictionary.
 
@@ -150,7 +152,8 @@ The function first creates a dictionary result containing the information about 
 ### 3. room.py
 It consists of 4 functions:
 
-#### 1st Function: def get(email: str):<pre>
+#### 1st Function: def get(email: str):
+<pre>
 It accepts email as argument and return list of rooms associated with given mail or of type guest.
 Firstly, it stores all the room with the current user as 'member' or of guest type in a dictionary.
 Then if the room is of direct type, it splits members with " , " and names it after the opposite member of the group.
@@ -160,7 +163,8 @@ effectively skipping further processing for this room.
 It appends list of user room with current user.
 After all the rooms are iterated, rooms are sorted.</pre>
 
-#### 2nd Function:  create_private room(room_name, users, type):<pre>
+#### 2nd Function:  create_private room(room_name, users, type):
+<pre>
 It creates a new private room for the user
 Firstly, it appends a new user to the list, which is the current user from the Frappe session (frappe.session.user).
 Then it converts the updated list back into a comma-separated string "members"  using ", ".join(users).
@@ -179,15 +183,16 @@ This means it will first sort based on the is_read attribute (unread rooms will 
 
 
 ### 4. User.py
-  <pre>
+<pre>
 Validate_room_kwargs: This is a decorator function that validates the keyword arguments of the decorated function.
-The function validate_room_kwargs takes another function (function) as an argument, and it returns a new function (_validator) that performs the validation before and after
-calling the original function.
+The function validate_room_kwargs takes another function (function) as an argument, and it returns a new function (_validator) that performs the 
+validation before and after calling the original function.
 The decorator checks whether the full_name argument is provided and throws an error if it's missing.
 It also checks whether the message argument is provided and throws an error if it's not provided or too short.
 Additionally, it validates the email argument to ensure it is a valid email address</pre>
 
-#### generate_guest_room(email: str, full_name: str, message: str)<pre>
+#### generate_guest_room(email: str, full_name: str, message: str)
+<pre>
 It fetches the list of chat operators from the "Chat Settings" doctype using frappe.get_cached_doc().
 It creates a new document of type "Chat Profile" using the input email and full_name. The document is inserted into the database using insert().
 It creates a new document of type "Chat Room" for the guest user. It includes details such as the guest's email, full name, room name, room type (Guest), and chat operators
@@ -196,9 +201,9 @@ It constructs a dictionary containing information about the guest's profile, inc
 The function then iterates over each operator in chat_operators and publishes a real-time event with the "new_room_creation" event name and the profile dictionary as the
 message. This event notifies each chat operator about the creation of a new room for the guest user.
 Finally, the function returns a tuple containing the room name and the guest's token obtained from the profile_doc.
-
-def get_guest_room(*, email: str, full_name: str, message: str):
-This function gives guest room if it already exists , if not create guest room.</pre>
+</pre>
+#### def get_guest_room(*, email: str, full_name: str, message: str):
+This function gives guest room if it already exists , if not create guest room.
 
 
   
