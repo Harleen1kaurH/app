@@ -246,7 +246,7 @@ The order in which various processes are triggered are in api.md file
 
 ### User Interface
 1. On the portal pages, the guest will be prompted with this view.
-![img](Screenshot (362).png)
+![img](https://github.com/Harleen1kaurH/app/blob/main/Screenshot%20(362).png)
 2. The guest will have to fill a form and after that they will be prompted to the chatting space.<br>
 3. You can click the message icon on the navbar to open the chat admin view.<br>
 4. Click on any room and start chatting right away.<br>
