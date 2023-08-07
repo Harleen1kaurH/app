@@ -244,8 +244,15 @@ This function gives guest room if it already exists , if not create guest room.
 <br><br>
 The order in which various processes are triggered are in api.md file
 
-  
-  
+### User Interface
+1. On the portal pages, the guest will be prompted with this view.<br>
+2. The guest will have to fill a form and after that they will be prompted to the chatting space.<br>
+3. You can click the message icon on the navbar to open the chat admin view.<br>
+4. Click on any room and start chatting right away.<br>
+5. Chat with any user on the site.<br>
+6. Create any private room.
+
+
 
   
  
