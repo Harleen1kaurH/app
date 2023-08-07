@@ -249,8 +249,6 @@ The order in which various processes are triggered are in api.md file
 ![img](https://github.com/Harleen1kaurH/app/blob/main/Screenshot%20(363).png)
 ![img](https://github.com/Harleen1kaurH/app/blob/main/Screenshot%20(364).png)
 ![img](https://github.com/Harleen1kaurH/app/blob/main/Screenshot%20(365).png)
-![img](https://github.com/Harleen1kaurH/app/blob/main/Screenshot%20(366).png)
-![img](https://github.com/Harleen1kaurH/app/blob/main/Screenshot%20(367).png)
 
 3. The guest will have to fill a form and after that they will be prompted to the chatting space.<br>
 4. You can click the message icon on the navbar to open the chat admin view.<br>
@@ -258,7 +256,11 @@ The order in which various processes are triggered are in api.md file
 
 5. Click on any room and start chatting right away.<br>
 6. Chat with any user on the site.<br>
+![img](https://github.com/Harleen1kaurH/app/blob/main/Screenshot%20(366).png)
+
 7. Create any private room.
+![img](https://github.com/Harleen1kaurH/app/blob/main/Screenshot%20(367).png)
+
 
 
 
